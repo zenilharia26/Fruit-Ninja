@@ -20,12 +20,12 @@ def generate_random_fruits():
 
 data = {
     'watermelon' : {
-        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\watermelon.jpg'),
+        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\watermelon.png'),
         'x' : 100,
         'y' : 800,
         'speed_x' : 0,
         'speed_y' : -80,
-        'throw' : False,
+        'throw' : True,
         't' : 0
     },
 
@@ -35,7 +35,7 @@ data = {
         'y' : 800,
         'speed_x' : -5,
         'speed_y' : -80,
-        'throw' : False,
+        'throw' : True,
         't' : 0
     }
 }
@@ -43,7 +43,7 @@ data = {
 g = 1
 
 pygame.display.update()
-generate_random_fruits()
+#generate_random_fruits()
 print(data)
 
 while True:
@@ -65,7 +65,8 @@ while True:
         current_position = pygame.mouse.get_pos()
         #print(current_position)
         if current_position[0] > value['x'] and current_position[0] < value['x']+60 and current_position[1] > value['y'] and current_position[1] < value['y']+60:
-            print('Hit')
+            value['img'] = pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\half_'+key+'.png')
+            value['speed_x'] += 10
     
     pygame.display.update()
     clock.tick(13)

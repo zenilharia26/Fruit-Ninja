@@ -1,5 +1,4 @@
 import pygame, sys
-from pygame.locals import *
 import time
 import random
 
@@ -10,19 +9,19 @@ clock = pygame.time.Clock()
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((width, height))
-gameDisplay.fill((0,0,0))
+gameDisplay.fill((255,255,255))
 
 def generate_random_fruits():
     for key,value in data.items():
-        if(random.random() >= 0.5):
+        if(random.random() >= 0.0):
             value['throw'] = True
         else:
             value['throw'] = False
 
 data = {
     'watermelon' : {
-        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit Ninja\\watermelon.png'),
-        'x' : 0,
+        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\watermelon.jpg'),
+        'x' : 100,
         'y' : 800,
         'speed_x' : 0,
         'speed_y' : -80,
@@ -31,10 +30,10 @@ data = {
     },
 
     'orange' : {
-        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit Ninja\\orange.png'),
+        'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\orange.png'),
         'x' : 400,
         'y' : 800,
-        'speed_x' : -10,
+        'speed_x' : -5,
         'speed_y' : -80,
         'throw' : False,
         't' : 0
@@ -48,7 +47,7 @@ generate_random_fruits()
 print(data)
 
 while True:
-    gameDisplay.fill((0,0,0))
+    gameDisplay.fill((255,255,255))
     for key,value in data.items():
         if value['throw']:
             value['x'] = value['x'] + value['speed_x']
@@ -62,6 +61,11 @@ while True:
                 value['t'] = 0
 
             gameDisplay.blit(value['img'], (value['x'],value['y']))
+        
+        current_position = pygame.mouse.get_pos()
+        #print(current_position)
+        if current_position[0] > value['x'] and current_position[0] < value['x']+60 and current_position[1] > value['y'] and current_position[1] < value['y']+60:
+            print('Hit')
     
     pygame.display.update()
     clock.tick(13)

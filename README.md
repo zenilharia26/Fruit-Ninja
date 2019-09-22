@@ -9,4 +9,4 @@ You can run this game using the following command on your command prompt or term
 
 You only have to move your mouse cursor over the fruit to cut it.
 
-The game uses basic physics and the fps of the game is set to 13 which makes it look like the game is continuous. In reality, it is moving pictures and hence the images of the fruits do not move along a continuous path but are displayed on discrete points for a short span of time. Hence the user might face the problem, wherein the fruit is not cut even if the cursor is placed on the image of the fruit. 
+The game uses basic physics and the fps of the game is set to 13 which makes it look like the game is continuous. In reality, it is moving pictures and hence the images of the fruits do not move along a continuous path but are displayed on discrete points for a short span of time. Hence the user might face the problem, wherein the fruit is not cut even if the cursor is placed on the image of the fruit. Currently the game only has two fruits to play with.

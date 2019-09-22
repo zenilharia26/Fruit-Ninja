@@ -5,6 +5,8 @@ import random
 
 width = 600
 height = 800
+white = (255,255,255)
+black = (0,0,0)
 clock = pygame.time.Clock()
 g = 1
 score = 0
@@ -13,20 +15,22 @@ fruits = ['watermelon', 'orange']
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((width, height))
-gameDisplay.fill((255,255,255))
+gameDisplay.fill(white)
+font = pygame.font.Font(os.path.join(os.getcwd(), 'comic.ttf'), 32)
+score_text = font.render(str(score), True, black, white)
 
 def generate_random_fruits(fruit):
 
     path = os.path.join(os.getcwd(), fruit+'.png')
     data[fruit] = {
-        #'img' : pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\'+fruit+'.png'),
         'img' : pygame.image.load(path),
-        'x' : random.randint(50, 550),
+        'x' : random.randint(100, 500),
         'y' : 800,
         'speed_x' : random.randint(-10, 10),
-        'speed_y' : random.randint(-101, -80),
+        'speed_y' : random.randint(-80, -60),
         'throw' : False,
-        't' : 0
+        't' : 0,
+        'hit' : False,
     }
 
     if(random.random() >= 0.75):
@@ -39,10 +43,10 @@ for fruit in fruits:
     generate_random_fruits(fruit)
 
 pygame.display.update()
-print(data)
 
 while True:
-    gameDisplay.fill((255,255,255))
+    gameDisplay.fill(white)
+    gameDisplay.blit(score_text, (0,0))
     for key,value in data.items():
         if value['throw']:
             value['x'] = value['x'] + value['speed_x']
@@ -56,24 +60,19 @@ while True:
                 generate_random_fruits(key)
 
             current_position = pygame.mouse.get_pos()
-            #print(current_position)
-            if current_position[0] > value['x'] and current_position[0] < value['x']+60 and current_position[1] > value['y'] and current_position[1] < value['y']+60:
-                # value['img'] = pygame.image.load(r'C:\\Users\\Zenil\\Documents\\CSI\\Fruit-Ninja\\half_'+key+'.png')
+            if not value['hit'] and current_position[0] > value['x'] and current_position[0] < value['x']+60 and current_position[1] > value['y'] and current_position[1] < value['y']+60:
                 path = os.path.join(os.getcwd(),'half_'+key+'.png')
                 value['img'] = pygame.image.load(path)
                 value['speed_x'] += 10
                 score += 1
-                print('Hit, new score is', score)
+                score_text = font.render(str(score), True, black, white)
+                value['hit'] = True
 
         else:
             generate_random_fruits(key)
 
     pygame.display.update()
     clock.tick(fps)
-
-    '''current_position = pygame.mouse.get_pos()
-    if current_position[0] > init_x and current_position[0] < init_x+60 and current_position[1] > init_y and current_position[1] < init_y+60:
-        print('Hit')'''
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

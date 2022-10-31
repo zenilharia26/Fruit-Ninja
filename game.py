@@ -15,7 +15,7 @@ fruits = ['watermelon', 'orange']
 
 pygame.init()
 gameDisplay = pygame.display.set_mode((width, height))
-gameDisplay.fill(white)
+gameDisplay.fill(black)
 font = pygame.font.Font(os.path.join(os.getcwd(), 'comic.ttf'), 32)
 score_text = font.render(str(score), True, black, white)
 
